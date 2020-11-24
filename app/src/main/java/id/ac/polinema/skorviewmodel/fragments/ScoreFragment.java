@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import id.ac.polinema.skorviewmodel.R;
@@ -36,11 +37,14 @@ public class ScoreFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
+
 		FragmentScoreBinding binding = DataBindingUtil
-			.inflate(inflater, R.layout.fragment_score, container, false);
+				.inflate(inflater, R.layout.fragment_score, container, false);
 		// instance viewmodel here
+		binding.setFragment(this);
+		binding.setLifecycleOwner(this);
+		viewModel = new ViewModelProvider(requireActivity()).get(ScoreViewModel.class);
+		binding.setVm(viewModel);
 		return binding.getRoot();
 	}
-
-
 }
